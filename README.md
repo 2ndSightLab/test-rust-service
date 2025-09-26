@@ -82,7 +82,7 @@ __Building and Testing__
 ./run.sh
 ```
 
-__Bependencies__
+__Dependencies__
 
 
 - `rust-service`: Core service framework library
