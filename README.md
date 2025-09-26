@@ -2,7 +2,7 @@
 
 A sample Rust service that demonstrates how to use the [rust-service](https://github.com/2ndSightLab/rust-service) library to build a secure, production-ready service. This service prints the current time periodically with comprehensive logging, configuration management, and security validation.
 
-## Blog Posts
+__Blog Posts__
 
 Written in one day having never used rust before:\
 https://medium.com/cloud-security/how-i-learned-rust-in-one-day-with-amazon-q-1398b75270c5
@@ -22,7 +22,7 @@ https://medium.com/cloud-security/preventing-amazon-q-from-making-the-same-mista
 Turning the service into an extensible service library anyone can use that runs their own actions:\
 https://medium.com/cloud-security/an-extensible-library-anyone-can-use-to-build-a-rust-service-f88eddf9d14f
 
-## Features
+__Features__
 
 - **Time Action**: Prints current UTC timestamp every configured interval
 - **Security Validation**: Prevents running as root, validates user identity
@@ -31,7 +31,7 @@ https://medium.com/cloud-security/an-extensible-library-anyone-can-use-to-build-
 - **Configuration Management**: TOML-based configuration with validation
 - **Graceful Shutdown**: Handles Ctrl+C for clean service termination
 
-## Architecture
+__Add Your Own Service Code__
 
 This service implements a single `TimeAction` that uses the rust-service library framework:
 
@@ -51,7 +51,7 @@ impl Action for TimeAction {
 }
 ```
 
-## Configuration
+__Configuration__
 
 The service uses `/etc/test-rust-service/config.toml` with these settings:
 
@@ -63,39 +63,27 @@ The service uses `/etc/test-rust-service/config.toml` with these settings:
 - `DISK_THRESHOLD`: Disk usage alert threshold (default: 80%)
 - Additional security and validation limits
 
-## Building and Running
+__Building and Testing__
 
-### Build
 ```bash
+# Build
 ./build.sh
-```
-Choose between debug (1) or release (2) build.
 
-### Install
-```bash
+# Run tests
+./test.sh
+
+# Check best practices
+./best-practices.sh
+
+# Install the program
 ./install.sh
-```
-Creates service user, directories, and installs binary with proper permissions.
 
-### Run
-```bash
+# Run service
 ./run.sh
 ```
-Validates installation and runs service as dedicated user.
 
-### Test
-```bash
-./test.sh
-```
-Runs comprehensive test suite.
+__Bependencies__
 
-### Security Check
-```bash
-./best-practices.sh
-```
-Validates code follows Rust security best practices.
-
-## Dependencies
 
 - `rust-service`: Core service framework library
 - `chrono`: Date/time handling for timestamp generation
@@ -104,7 +92,7 @@ Validates code follows Rust security best practices.
 - `toml`: Configuration file parsing
 - Security and system libraries (users, nix, libc)
 
-## Security Features
+__Seurity Features__
 
 - Dedicated service user (test-rust-service)
 - Protected configuration files (root-owned, 644 permissions)
@@ -113,14 +101,16 @@ Validates code follows Rust security best practices.
 - Secure file operations with proper locking
 - Prevention of root execution
 
-## Installation Layout
+__Installation Layout__
 
 - Binary: `/opt/test-rust-service/test-rust-service`
 - Config: `/etc/test-rust-service/config.toml`
 - Logs: `/var/log/test-rust-service/`
 - Service User: `test-rust-service` (system account)
 
-## Usage Example
+__Usage Example__
+
+Run all the scripts under Building and Testing in order.
 
 After installation, the service runs continuously and outputs:
 ```
