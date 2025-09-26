@@ -8,6 +8,9 @@ echo "===================================="
 echo "Running all tests..."
 cargo test
 
+echo "Running best practices test..."
+cargo test best_practices_test
+
 # Extract test results
 TEST_OUTPUT=$(cargo test 2>&1)
 SECURITY_TESTS=$(echo "$TEST_OUTPUT" | grep -A20 "Running tests/security_checks.rs" | grep -E "test result: ok\." | grep -oE "[0-9]+ passed" | grep -oE "[0-9]+" | head -1)

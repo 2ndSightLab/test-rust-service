@@ -1,17 +1,17 @@
-use rust_service::{Action, ServiceError, config::Config};
 use chrono::Utc;
 use log::info;
+use rust_service::{config::Config, Action, ServiceError};
 
 struct TimeAction;
 
 impl Action for TimeAction {
     fn execute(&self, _config: &Config) -> Result<(), ServiceError> {
         let current_time = Utc::now().format("%Y-%m-%d %H:%M:%S UTC");
-        info!("Current time: {}", current_time);
+        info!("Current time: {current_time}");
         Ok(())
     }
 
-    fn name(&self) -> &str {
+    fn name(&self) -> &'static str {
         "time"
     }
 }
@@ -41,13 +41,13 @@ mod tests {
             MAX_MESSAGE_LEN: 200,
             MAX_LOG_PATH_LEN: 255,
             MIN_LOG_INTERVAL_MS: 100,
-            MAX_LOG_FILE_SIZE: 10485760,
+            MAX_LOG_FILE_SIZE: 10_485_760,
             MAX_TIME_INTERVAL: 3600,
             MAX_THRESHOLD_PERCENT: 95,
             MAX_FD_LIMIT: 65536,
             MAX_CONFIG_FIELD_LEN: 1000,
         };
-        
+
         let RESULT = ACTION.execute(&CONFIG);
         assert!(RESULT.is_ok());
     }
@@ -56,11 +56,11 @@ mod tests {
     fn test_time_format_validation() {
         let NOW = Utc::now();
         let FORMATTED = NOW.format("%Y-%m-%d %H:%M:%S UTC").to_string();
-        
+
         // Check format matches expected pattern
         assert!(FORMATTED.contains("UTC"));
         assert!(FORMATTED.len() >= 20); // YYYY-MM-DD HH:MM:SS UTC
-        
+
         // Check it contains valid date components
         let PARTS: Vec<&str> = FORMATTED.split(' ').collect();
         assert_eq!(PARTS.len(), 3);
