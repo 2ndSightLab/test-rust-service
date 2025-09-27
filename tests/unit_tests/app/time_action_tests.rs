@@ -1,17 +1,18 @@
 use chrono::Utc;
 use log::info;
-use rust_service::{config::Config, Action, ServiceError};
+use rust_service::service::{Action, ServiceError};
+use rust_service::Config;
 
 struct TimeAction;
 
-impl Action for TimeAction {
+impl Action<Config> for TimeAction {
     fn execute(&self, _config: &Config) -> Result<(), ServiceError> {
         let current_time = Utc::now().format("%Y-%m-%d %H:%M:%S UTC");
         info!("Current time: {current_time}");
         Ok(())
     }
 
-    fn name(&self) -> &'static str {
+    fn name(&self) -> &str {
         "time"
     }
 }
@@ -30,15 +31,14 @@ mod tests {
     fn test_time_action_execute_returns_ok() {
         let ACTION = TimeAction;
         let CONFIG = Config {
-            SERVICE_NAME: "test-service".to_string(),
-            TIME_INTERVAL: 5,
-            MESSAGE: "test".to_string(),
             LOG_FILE_PATH: "/tmp/test.log".to_string(),
+            INSTALL_DIR: "/opt/test".to_string(),
+            CONFIG_DIR: "/etc/test".to_string(),
+            SERVICE_NAME: "test-service".to_string(),
             MEMORY_THRESHOLD: 80,
             DISK_THRESHOLD: 80,
             MIN_FD_LIMIT: 1024,
             MAX_SERVICE_NAME_LEN: 50,
-            MAX_MESSAGE_LEN: 200,
             MAX_LOG_PATH_LEN: 255,
             MIN_LOG_INTERVAL_MS: 100,
             MAX_LOG_FILE_SIZE: 10_485_760,

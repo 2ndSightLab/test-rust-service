@@ -1,21 +1,14 @@
-use chrono::Utc;
-use log::info;
-use rust_service::{config::Config, Action, ServiceError, ServiceRunner};
+pub mod action;
+pub mod security;
+pub mod service;
 
-struct TimeAction;
+pub use action::exec;
+pub use service::Config;
 
-impl Action for TimeAction {
-    fn execute(&self, _config: &Config) -> Result<(), ServiceError> {
-        let CURRENT_TIME = Utc::now().format("%Y-%m-%d %H:%M:%S UTC");
-        info!("Current time: {CURRENT_TIME}");
-        Ok(())
-    }
-
-    fn name(&self) -> &'static str {
-        "time"
-    }
-}
+use service::ServiceRunner;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    ServiceRunner::new().add_action(Box::new(TimeAction)).run()
+    ServiceRunner::<Config>::new()
+        .add_action(exec::new()?)
+        .run()
 }
