@@ -67,19 +67,19 @@ __Building and Testing__
 
 ```bash
 # Build
-./build.sh
+./scripts/build.sh
 
 # Run tests
-./test.sh
+./scripts/test.sh
 
 # Check best practices
-./best-practices.sh
+./scripts/best-practices.sh
 
 # Install the program
-./install.sh
+./scripts/install.sh
 
 # Run service
-./run.sh
+./scripts/run.sh
 ```
 
 __Dependencies__
