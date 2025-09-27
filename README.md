@@ -53,7 +53,12 @@ impl Action for TimeAction {
 
 __Configuration__
 
-The service uses `/etc/test-rust-service/config.toml` with these settings:
+The service uses configuration files in `/etc/test-rust-service/`:
+
+- `config-service.toml`: Service-level configuration
+- `config-action.toml`: Action-specific configuration
+
+Key settings include:
 
 - `SERVICE_NAME`: Service identifier (test-rust-service)
 - `TIME_INTERVAL`: Seconds between time outputs (default: 5)
@@ -92,7 +97,7 @@ __Dependencies__
 - `toml`: Configuration file parsing
 - Security and system libraries (users, nix, libc)
 
-__Seurity Features__
+__Security Features__
 
 - Dedicated service user (test-rust-service)
 - Protected configuration files (root-owned, 644 permissions)
@@ -104,7 +109,7 @@ __Seurity Features__
 __Installation Layout__
 
 - Binary: `/opt/test-rust-service/test-rust-service`
-- Config: `/etc/test-rust-service/config.toml`
+- Config: `/etc/test-rust-service/config-service.toml` and `/etc/test-rust-service/config-action.toml`
 - Logs: `/var/log/test-rust-service/`
 - Service User: `test-rust-service` (system account)
 
