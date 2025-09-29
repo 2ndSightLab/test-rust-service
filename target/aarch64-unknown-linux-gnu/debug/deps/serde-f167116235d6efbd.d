@@ -1,0 +1,14 @@
+/home/ec2-user/foxy/test-rust-service/target/aarch64-unknown-linux-gnu/debug/deps/serde-f167116235d6efbd.d: /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/lib.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/integer128.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/mod.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/de.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/ser.rs /home/ec2-user/foxy/test-rust-service/target/aarch64-unknown-linux-gnu/debug/build/serde-ca9b4bd5900dc858/out/private.rs
+
+/home/ec2-user/foxy/test-rust-service/target/aarch64-unknown-linux-gnu/debug/deps/libserde-f167116235d6efbd.rlib: /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/lib.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/integer128.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/mod.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/de.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/ser.rs /home/ec2-user/foxy/test-rust-service/target/aarch64-unknown-linux-gnu/debug/build/serde-ca9b4bd5900dc858/out/private.rs
+
+/home/ec2-user/foxy/test-rust-service/target/aarch64-unknown-linux-gnu/debug/deps/libserde-f167116235d6efbd.rmeta: /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/lib.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/integer128.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/mod.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/de.rs /home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/ser.rs /home/ec2-user/foxy/test-rust-service/target/aarch64-unknown-linux-gnu/debug/build/serde-ca9b4bd5900dc858/out/private.rs
+
+/home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/lib.rs:
+/home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/integer128.rs:
+/home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/mod.rs:
+/home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/de.rs:
+/home/ec2-user/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.227/src/private/ser.rs:
+/home/ec2-user/foxy/test-rust-service/target/aarch64-unknown-linux-gnu/debug/build/serde-ca9b4bd5900dc858/out/private.rs:
+
+# env-dep:OUT_DIR=/home/ec2-user/foxy/test-rust-service/target/aarch64-unknown-linux-gnu/debug/build/serde-ca9b4bd5900dc858/out

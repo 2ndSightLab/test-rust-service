@@ -1,8 +1,8 @@
-use crate::service::{Action, Config, ServiceError};
+use rust_service::service::{Action, Config, ServiceError};
 use chrono::Utc;
 use log::info;
 
-struct TimeAction;
+pub struct TimeAction;
 
 impl Action<Config> for TimeAction {
     fn execute(&self, _config: &Config) -> Result<(), ServiceError> {

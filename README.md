@@ -1,6 +1,6 @@
 # test-rust-service
 
-A sample Rust service that demonstrates how to use the [rust-service](https://github.com/2ndSightLab/rust-service) library to build a secure, production-ready service. This service prints the current time periodically with comprehensive logging, configuration management, and security validation.
+A sample Rust service that demonstrates how to use the rust-service library to build a secure, production-ready service. This service implements a TimeAction that prints the current time with comprehensive logging and configuration management.
 
 __Blog Posts__
 
@@ -24,28 +24,27 @@ https://medium.com/cloud-security/an-extensible-library-anyone-can-use-to-build-
 
 __Features__
 
-- **Time Action**: Prints current UTC timestamp every configured interval
-- **Security Validation**: Prevents running as root, validates user identity
-- **System Monitoring**: Monitors memory and disk usage thresholds
-- **Secure Logging**: File logging with proper permissions and locking
+- **Time Action**: Prints current UTC timestamp
 - **Configuration Management**: TOML-based configuration with validation
 - **Graceful Shutdown**: Handles Ctrl+C for clean service termination
+- **Extensible Framework**: Built on rust-service library for easy extension
 
-__Add Your Own Service Code__
+__Implementation__
 
-This service implements a single `TimeAction` that uses the rust-service library framework:
+This service implements a `TimeAction` in `src/action/exec.rs`:
 
 ```rust
-struct TimeAction;
+pub struct TimeAction;
 
-impl Action for TimeAction {
+impl Action<Config> for TimeAction {
     fn execute(&self, _config: &Config) -> Result<(), ServiceError> {
         let CURRENT_TIME = Utc::now().format("%Y-%m-%d %H:%M:%S UTC");
-        info!("Current time: {}", CURRENT_TIME);
+        println!("Current time: {CURRENT_TIME}");
+        info!("Current time: {CURRENT_TIME}");
         Ok(())
     }
 
-    fn name(&self) -> &str {
+    fn name(&self) -> &'static str {
         "time"
     }
 }
@@ -53,20 +52,22 @@ impl Action for TimeAction {
 
 __Configuration__
 
-The service uses configuration files in `/etc/test-rust-service/`:
+The service uses the rust-service library's configuration system. Action-specific configuration is defined in `src/action/config.rs`:
 
-- `config-service.toml`: Service-level configuration
-- `config-action.toml`: Action-specific configuration
+```rust
+#[derive(Debug, Deserialize, Clone)]
+pub struct ActionConfig {
+    pub MESSAGE: String,
+    pub MAX_MESSAGE_LEN: usize,
+    pub TIME_INTERVAL: u64,
+    pub MAX_TIME_INTERVAL: u64,
+    pub DEFAULT_MESSAGE_LEN: usize,
+}
+```
 
-Key settings include:
-
-- `SERVICE_NAME`: Service identifier (test-rust-service)
-- `TIME_INTERVAL`: Seconds between time outputs (default: 5)
-- `MESSAGE`: Service status message
-- `LOG_FILE_PATH`: Log directory path (/var/log/test-rust-service)
-- `MEMORY_THRESHOLD`: Memory usage alert threshold (default: 80%)
-- `DISK_THRESHOLD`: Disk usage alert threshold (default: 80%)
-- Additional security and validation limits
+Configuration files are expected in standard locations:
+- Service config: `service.toml` 
+- Action config: `action.toml`
 
 __Building and Testing__
 
@@ -89,13 +90,13 @@ __Building and Testing__
 
 __Dependencies__
 
-
 - `rust-service`: Core service framework library
 - `chrono`: Date/time handling for timestamp generation
 - `log`: Logging framework
 - `serde`: Configuration serialization
 - `toml`: Configuration file parsing
-- Security and system libraries (users, nix, libc)
+- `ctrlc`: Signal handling for graceful shutdown
+- `libc`: System interface
 
 __Security Features__
 

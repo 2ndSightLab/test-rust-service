@@ -1,0 +1,2 @@
+createSrcSidebar('[["test_rust_service",["",[["action",[],["config_action.rs","exec.rs","mod.rs"]],["security",[],["limits.rs","mod.rs","uid.rs","validation.rs"]],["service",[],["config.rs","config_service.rs","error.rs","logging.rs","mod.rs","monitoring.rs","run.rs"]]],["lib.rs"]]]]');
+//{"start":19,"fragment_lengths":[264]}

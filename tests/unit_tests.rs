@@ -1,13 +1,39 @@
+use std::process::Command;
+
 mod unit_tests {
-    mod app {
-        mod config_tests;
-        mod monitoring_tests;
-        mod monitoring_unit_tests;
+    mod time_action_test;
+}
+
+#[test]
+fn run_all_common_unit_tests() {
+    let output = Command::new("cargo")
+        .args(&["test", "--manifest-path", "../rust-common-tests/Cargo.toml", "--", "--nocapture", "tests::unit_tests::common::"])
+        .current_dir(".")
+        .output()
+        .expect("Failed to execute unit tests");
+    
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    
+    // Print the output so we can see individual test results
+    println!("{}", stdout);
+    if !stderr.is_empty() {
+        eprintln!("{}", stderr);
     }
-    mod common {
-        mod best_practices_test;
-        mod test_script_validation;
-        mod toml_lint_test;
-        mod variable_naming_test;
-    }
+    
+    // Check if any tests failed
+    let failed_count = stdout.lines()
+        .filter(|line| line.contains("test result:"))
+        .filter_map(|line| {
+            if line.contains("failed") {
+                line.split_whitespace()
+                    .find(|word| word.parse::<u32>().is_ok() && line.split(word).nth(1).unwrap_or("").contains("failed"))
+                    .and_then(|s| s.parse::<u32>().ok())
+            } else {
+                None
+            }
+        })
+        .sum::<u32>();
+    
+    assert_eq!(failed_count, 0, "Some unit tests failed");
 }
