@@ -1,4 +1,4 @@
 SERVICE_NAME = "test-rust-service"
 INSTALL_DIR = "/opt/test-rust-service"
-LOG_FILE_PATH = "/var/log/test-rust-service"
+LOG_FILE_PATH = "/var/log"
 
