@@ -2,6 +2,11 @@
 
 A sample Rust service that demonstrates how to use the rust-service library to build a secure, production-ready service. This service implements a TimeAction that prints the current time with comprehensive logging and configuration management.
 
+```
+/scripts/run.sh to run the service (will also build and deploy it)
+/scripts/test.sh to run the tests (will also build and deploy it)
+```
+
 __Blog Posts__
 
 Written in one day having never used rust before:\
