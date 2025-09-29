@@ -2,9 +2,23 @@
 
 A sample Rust service that demonstrates how to use the rust-service library to build a secure, production-ready service. This service implements a TimeAction that prints the current time with comprehensive logging and configuration management.
 
-```
-/scripts/run.sh to run the service (will also build and deploy it)
-/scripts/test.sh to run the tests (will also build and deploy it)
+__Building and Testing__
+
+```bash
+# Build
+./scripts/build.sh
+
+# Run tests
+./scripts/test.sh
+
+# Check best practices
+./scripts/best-practices.sh
+
+# Install the program
+./scripts/install.sh
+
+# Run service
+./scripts/run.sh
 ```
 
 __Blog Posts__
@@ -73,25 +87,6 @@ pub struct ActionConfig {
 Configuration files are expected in standard locations:
 - Service config: `service.toml` 
 - Action config: `action.toml`
-
-__Building and Testing__
-
-```bash
-# Build
-./scripts/build.sh
-
-# Run tests
-./scripts/test.sh
-
-# Check best practices
-./scripts/best-practices.sh
-
-# Install the program
-./scripts/install.sh
-
-# Run service
-./scripts/run.sh
-```
 
 __Dependencies__
 
