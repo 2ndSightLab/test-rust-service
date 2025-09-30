@@ -65,12 +65,12 @@ fi
 # Exit on any error
 set -e
 
-# Get binary name from Cargo.toml or lib config
+# Get binary name from config file (same as install.sh)
 if [[ -z "$BINARY_NAME" ]]; then
-    BINARY_NAME=$(grep -A 10 "^\[\[bin\]\]" Cargo.toml | grep "^name" | head -1 | sed 's/name = "\(.*\)"/\1/' | tr -d '"')
-    if [ -z "$BINARY_NAME" ]; then
-        # Fallback to package name if no explicit binary name
-        BINARY_NAME=$(grep "^name" Cargo.toml | head -1 | sed 's/name = "\(.*\)"/\1/' | tr -d '"')
+    if [[ "$CONFIG_FILE" == *"lib.toml" ]]; then
+        BINARY_NAME="$LIB_NAME"
+    else
+        BINARY_NAME=$(grep "^SERVICE_NAME" "$CONFIG_FILE" | sed 's/SERVICE_NAME = "\(.*\)"/\1/' | tr -d '"')
     fi
 fi
 
@@ -90,8 +90,8 @@ echo "5. Dependency tree analysis..."
 cargo tree --duplicates
 
 echo "6. Binary size analysis..."
-RUSTFLAGS="-D warnings -A non_snake_case -A clippy::upper_case_acronyms" cargo build --release
-ls -lh target/release/$BINARY_NAME
+RUSTFLAGS="-D warnings -A non_snake_case -A clippy::upper_case_acronyms" cargo build $BUILD_FLAG
+ls -lh target/$BUILD_TYPE/$BINARY_NAME
 
 echo "7. Architecture-specific check..."
 CURRENT_ARCH=$(rustc --version --verbose | grep host | cut -d' ' -f2)
