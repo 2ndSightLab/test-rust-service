@@ -57,6 +57,7 @@ BINARY_PATH="target/$CURRENT_ARCH/$BINARY_TYPE/$SERVICE_NAME"
 # Read directories from config file
 INSTALL_DIR=$(read_config_value "INSTALL_DIR" "$CONFIG_FILE" "$DEBUG_SUFFIX")
 LOG_DIR=$(read_config_value "LOG_FILE_PATH" "$CONFIG_FILE" "$DEBUG_SUFFIX")
+# If the script is run in release mode, the install directory is the value of INSTALL_DIRECTORY from the local service.toml or lib.toml plus / then file (SERVICE_NAME or LIBRARY_NAME respectively). If debug mode it's the same but the directory has -debug at the end.
 CONFIG_DIR="$INSTALL_DIR"
 SERVICE_NAME=$(read_config_value "SERVICE_NAME" "$CONFIG_FILE")
 
@@ -98,6 +99,7 @@ sudo chmod +x "$INSTALL_DIR/$SERVICE_NAME"
 echo "Installing configuration..."
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 PROJECT_ROOT=$(dirname "$SCRIPT_DIR")
+# The local config file is in the current repository at config/service.toml for a service, config/lib.toml for a library or config/action.toml for an action. When the executable gets deployed this file is copied to the install directory.
 LOCAL_CONFIG="$PROJECT_ROOT/config/service.toml"
 
 if [[ -f "$LOCAL_CONFIG" ]]; then

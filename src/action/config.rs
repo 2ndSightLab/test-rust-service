@@ -1,4 +1,4 @@
-use rust_service::service::config_reader::validate_config_field;
+use rust_service::security::validation::validate_config_field;
 use rust_service::service::error::ServiceError;
 use serde::Deserialize;
 

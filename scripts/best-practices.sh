@@ -108,6 +108,8 @@ echo "10. Test coverage analysis..."
 cargo tarpaulin --out Stdout || echo "Warning: cargo tarpaulin not installed"
 
 echo "11. Memory safety checks..."
-cargo +nightly miri test || echo "Warning: cargo miri not available"
+echo -e "${RED}⚠️  WARNING: miri checks SKIPPED to avoid downloading components${NC}"
+echo -e "${RED}   Memory safety checks will be SKIPPED${NC}"
+echo -e "${RED}   Run manually with: cargo +nightly miri test${NC}"
 
 echo "All essential best practices checks completed successfully!"

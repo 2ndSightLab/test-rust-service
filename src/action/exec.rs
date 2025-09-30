@@ -1,6 +1,6 @@
-use rust_service::service::{Action, Config, ServiceError};
 use chrono::Utc;
 use log::info;
+use rust_service::service::{Action, Config, ServiceError};
 
 pub struct TimeAction;
 

@@ -4,7 +4,9 @@ mod tests {
 
     #[test]
     fn test_service_binary_exists() {
-        assert!(Path::new("./target/debug/test-rust-service").exists(), 
-                "Service binary should exist");
+        assert!(
+            Path::new("./target/debug/test-rust-service").exists(),
+            "Service binary should exist"
+        );
     }
 }

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Clean up any leftover cargo install temp directories
+rm -rf /tmp/cargo-install* 2>/dev/null
+
 # Colors
 GREEN='\033[0;32m'
 RED='\033[1;31m'
@@ -11,8 +14,62 @@ SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 source "$SCRIPT_DIR/functions/read_config.sh"
 source "$SCRIPT_DIR/functions/find_config.sh"
 
+# Function to check for required dependencies
+check_dependencies() {
+    local missing_deps=()
+    local tarpaulin_missing=false
+    local miri_missing=false
+    
+    # Check for cargo subcommands required by best-practices.sh
+    if ! cargo --list | grep -q "license"; then
+        missing_deps+=("cargo-license")
+    fi
+    
+    if ! cargo --list | grep -q "tarpaulin"; then
+        tarpaulin_missing=true
+    fi
+    
+    # Check for miri component (check both stable and nightly)
+    if ! rustup component list | grep -q "miri.*installed" && ! rustup component list --toolchain nightly 2>/dev/null | grep -q "miri.*installed"; then
+        miri_missing=true
+    fi
+    
+    # Show warning for tarpaulin if missing
+    if [[ "$tarpaulin_missing" == true ]]; then
+        echo -e "${RED}⚠️  WARNING: cargo-tarpaulin is not installed!${NC}"
+        echo -e "${RED}   Code coverage analysis will be SKIPPED${NC}"
+        echo -e "${RED}   Install with: cargo install cargo-tarpaulin${NC}"
+        echo ""
+    fi
+    
+    # Show warning for miri if missing
+    if [[ "$miri_missing" == true ]]; then
+        echo -e "${RED}⚠️  WARNING: miri is not installed!${NC}"
+        echo -e "${RED}   Memory safety checks will be SKIPPED${NC}"
+        echo -e "${RED}   Install with: rustup component add miri${NC}"
+        echo ""
+    fi
+    
+    if [[ ${#missing_deps[@]} -gt 0 ]]; then
+        echo -e "${RED}Error: Missing required dependencies for full test suite:${NC}"
+        for dep in "${missing_deps[@]}"; do
+            echo -e "  - $dep"
+        done
+        echo ""
+        echo "To install missing dependencies:"
+        if [[ " ${missing_deps[@]} " =~ " cargo-license " ]]; then
+            echo "  cargo install cargo-license"
+        fi
+        echo ""
+        exit 1
+    fi
+}
+
 echo "Running Rust Service Test Suite"
 echo "==============================="
+
+# Check dependencies first
+check_dependencies
 
 # Check for command line arguments or non-interactive mode
 if [[ "$1" == "--debug" ]] || [[ -n "$CI" ]] || [[ ! -t 0 ]]; then
@@ -58,6 +115,10 @@ fi
 SERVICE_NAME=$(read_config_value "SERVICE_NAME" "$CONFIG_FILE")
 
 echo "Building $BUILD_TYPE binaries..."
+
+echo "Formatting code..."
+cargo fmt
+cd ../rust-common-tests && cargo fmt && cd - > /dev/null
 
 echo "Building $BUILD_TYPE binaries..."
 ./scripts/build.sh --debug
