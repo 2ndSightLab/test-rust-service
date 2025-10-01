@@ -23,4 +23,9 @@ pub fn run_common_tests(test_type: &str) {
     if !STDERR.is_empty() {
         eprintln!("{STDERR}");
     }
+
+    // Ensure the tests actually passed
+    if !OUTPUT.status.success() {
+        panic!("Common {test_type} tests failed");
+    }
 }

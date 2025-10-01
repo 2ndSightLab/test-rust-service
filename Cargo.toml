@@ -3,6 +3,14 @@ name = "test-rust-service"
 version = "0.1.0"
 edition = "2024"
 
+[package.metadata]
+install_dir = "/opt/test-rust-service"
+rust_service_path = "../rust-service"
+
+[[bin]]
+name = "test-rust-service"
+path = "src/main.rs"
+
 [lints.rust]
 non_snake_case = "allow"
 
@@ -17,6 +25,8 @@ libc = "0.2.176"
 
 [dev-dependencies]
 regex = "1.0"
+walkdir = "2.4"
+thiserror = "1.0"
 rust-common-tests = { path = "../rust-common-tests" }
 
 [[test]]
@@ -24,9 +34,21 @@ name = "integration"
 path = "tests/integration.rs"
 
 [[test]]
+name = "integration_common"
+path = "../rust-common-tests/tests/integration_common.rs"
+
+[[test]]
 name = "security_checks"
 path = "tests/security_checks.rs"
 
 [[test]]
+name = "security_checks_common"
+path = "../rust-common-tests/tests/security_checks_common.rs"
+
+[[test]]
 name = "unit_tests"
 path = "tests/unit_tests.rs"
+
+[[test]]
+name = "unit_tests_common"
+path = "../rust-common-tests/tests/unit_tests_common.rs"
