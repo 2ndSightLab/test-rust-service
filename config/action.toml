@@ -1,6 +1,12 @@
 # Message to display at each interval
 MESSAGE = "Current time"
 
+# Message format string for displaying time
+MESSAGE_FORMAT = "Current time: {}"
+
+# Time format string for displaying current time
+CURRENT_TIME_FORMAT = "%Y-%m-%d %H:%M:%S UTC"
+
 # Maximum allowed length for log messages (security limit)
 MAX_MESSAGE_LEN = 500
 

@@ -25,7 +25,5 @@ pub fn run_common_tests(test_type: &str) {
     }
 
     // Ensure the tests actually passed
-    if !OUTPUT.status.success() {
-        panic!("Common {test_type} tests failed");
-    }
+    assert!(OUTPUT.status.success(), "Common {test_type} tests failed");
 }

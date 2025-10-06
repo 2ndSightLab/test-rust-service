@@ -31,7 +31,7 @@ rust-common-tests = { path = "../rust-common-tests" }
 
 [[test]]
 name = "integration"
-path = "tests/integration.rs"
+path = "tests/integration_test_rust_service.rs"
 
 [[test]]
 name = "integration_common"
@@ -39,15 +39,15 @@ path = "../rust-common-tests/tests/integration_common.rs"
 
 [[test]]
 name = "security_checks"
-path = "tests/security_checks.rs"
+path = "tests/security_checks_test_rust_service.rs"
 
 [[test]]
 name = "security_checks_common"
 path = "../rust-common-tests/tests/security_checks_common.rs"
 
 [[test]]
-name = "unit_tests"
-path = "tests/unit_tests.rs"
+name = "unit_test"
+path = "tests/unit_test_test_rust_service.rs"
 
 [[test]]
 name = "unit_tests_common"

@@ -1,4 +1,5 @@
 SERVICE_NAME = "test-rust-service"
+INSTALL_DIR = "/opt/test-rust-service"
 CONFIG_DIR = "/etc/test-rust-service"
 LOG_FILE_PATH = "/var/log"
 MEMORY_THRESHOLD = 80

@@ -1,7 +1,8 @@
 mod common;
 
 mod integration {
-    mod time_output_test;
+    mod test_service_binary_exists;
+    mod test_time_interval_looping;
 }
 
 #[test]
