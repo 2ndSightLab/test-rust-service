@@ -2,6 +2,8 @@
 
 A sample Rust service that demonstrates how to use the rust-service library to build a secure, production-ready service. This service implements a TimeAction that prints the current time with comprehensive logging and configuration management.
 
+**Updated for rust-service v0.1.0**: This project has been updated to work with the new rust-service library structure that separates the service framework from the executable implementation.
+
 __Building and Testing__
 
 ```bash
@@ -71,17 +73,16 @@ impl Action<Config> for TimeAction {
 
 __Configuration__
 
-The service uses the rust-service library's configuration system. Action-specific configuration is defined in `src/action/config.rs`:
+The service uses the rust-service library's configuration system. Action-specific configuration is defined in `config/action.toml`:
 
-```rust
-#[derive(Debug, Deserialize, Clone)]
-pub struct ActionConfig {
-    pub MESSAGE: String,
-    pub MAX_MESSAGE_LEN: usize,
-    pub TIME_INTERVAL: u64,
-    pub MAX_TIME_INTERVAL: u64,
-    pub DEFAULT_MESSAGE_LEN: usize,
-}
+```toml
+MESSAGE = "Current time: {}"
+MAX_MESSAGE_LEN = 100
+TIME_INTERVAL = 5
+MAX_TIME_INTERVAL = 3600
+DEFAULT_MESSAGE_LEN = 50
+CURRENT_TIME_FORMAT = "%Y-%m-%d %H:%M:%S UTC"
+MESSAGE_FORMAT = "Current time: {}"
 ```
 
 Configuration files are expected in standard locations:
@@ -120,9 +121,9 @@ Run all the scripts under Building and Testing in order.
 
 After installation, the service runs continuously and outputs:
 ```
-Current time: 2025-09-26 20:09:31 UTC
-Current time: 2025-09-26 20:09:36 UTC
-Current time: 2025-09-26 20:09:41 UTC
+Current time: 2025-10-06 20:19:29 UTC
+Current time: 2025-10-06 20:19:34 UTC
+Current time: 2025-10-06 20:19:39 UTC
 ```
 
 Stop with Ctrl+C for graceful shutdown.
