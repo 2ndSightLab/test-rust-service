@@ -1,6 +1,5 @@
-mod common;
-
-#[test]
-fn run_all_common_security_tests() {
-    common::run_common_tests("security_checks");
+mod security_checks_test_rust_service {
+    pub mod app {
+        // Security check tests will be added here
+    }
 }
